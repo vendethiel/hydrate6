@@ -1,6 +1,8 @@
 use Test;
 use Hydrate;
 
+plan 6;
+
 {
   class Inner {
     has $.a;
@@ -55,7 +57,7 @@ use Hydrate;
     has Inner @.inners;
   }
 
-  my %data = inners => [{val => 1}, {val => 2}, {val => 3}];
+  my %data = inners => ({val => 1}, {val => 2}, {val => 3});
   is 1, hydrate(Outer, %data).inners[0].val,
     "Can hydrate arrays as well";
 }

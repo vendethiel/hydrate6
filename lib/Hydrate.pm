@@ -41,7 +41,7 @@ sub hydrate(Mu:U \T, %data is copy,
     next unless $attr.has_accessor;
     my $name = $attr.name.substr(2); # remove @!, $!, etc
     with %data{$name}:delete -> \value {
-      %made{$name} = value-for($attr.type, $attr.name.comb[0], value,
+      %made{$name} := value-for($attr.type, $attr.name.comb[0], value,
         :$error-on-extra);
     } else {
       die "Missing attribute $name for {T.^name}" if $attr.required;
